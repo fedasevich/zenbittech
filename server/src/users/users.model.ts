@@ -1,5 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Column, DataType, Model, Table } from "sequelize-typescript";
+import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
+import { ResetPassword } from "src/auth/reset-password/reset-password.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -21,4 +22,7 @@ export class User extends Model<User, UserCreationAttrs> {
   @ApiProperty({ example: "12345", description: "User password" })
   @Column({ type: DataType.STRING, allowNull: false })
   password: string;
+
+  @HasMany(() => ResetPassword)
+  resetPasswords: ResetPassword[];
 }
