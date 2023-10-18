@@ -22,6 +22,11 @@ export class AuthService {
     return this.generateToken(user);
   }
 
+  async hashPassword(password: string) {
+    const hashedPassword = await bcrypt.hash(password, 5);
+    return hashedPassword;
+  }
+
   async signUp(userDto: CreateUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
     if (candidate) {
@@ -30,10 +35,11 @@ export class AuthService {
         HttpStatus.BAD_REQUEST
       );
     }
-    const hashPassword = await bcrypt.hash(userDto.password, 5);
+
+    const hashedPassword = await this.hashPassword(userDto.password);
     const user = await this.userService.createUser({
       ...userDto,
-      password: hashPassword,
+      password: hashedPassword,
     });
     return this.generateToken(user);
   }
@@ -44,6 +50,7 @@ export class AuthService {
       token: this.jwtService.sign(payload),
     };
   }
+
   private async validateRegularUser(userDto: CreateUserDto) {
     const user = await this.userService.getUserByEmail(userDto.email);
     if (!user) {
