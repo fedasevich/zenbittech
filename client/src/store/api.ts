@@ -15,6 +15,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
     mode: 'cors',
+    credentials: 'include',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
