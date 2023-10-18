@@ -38,6 +38,12 @@ import { UsersModule } from "./users/users.module";
       database: process.env.POSTGRES_DB,
       models: [Building, User, ResetPassword],
       autoLoadModels: true,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     }),
     UsersModule,
     AuthModule,
