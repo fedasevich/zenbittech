@@ -60,20 +60,8 @@ export class AuthService {
     throw new UnauthorizedException({ message: "Wrong password or email" });
   }
 
-  private async validateGoogleUser(userDto: CreateUserDto) {
-    const user = await this.userService.getUserByEmail(userDto.email);
-    if (!user) {
-      throw new UnauthorizedException({ message: "User doesn't exist" });
-    }
-    return user;
-  }
-
-  checkToken(req: any) {
+  checkToken(req: Request & { user: User }) {
     const token = this.generateToken(req.user);
     return token;
-  }
-
-  test(data: number) {
-    return data;
   }
 }
