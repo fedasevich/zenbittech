@@ -4,8 +4,12 @@ import { Flex } from '#/components/Flex/Flex';
 import styled from 'styled-components';
 
 export const StyledAuthPage = styled(Flex)`
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   width: 100%;
+
+  @media ${({ theme }) => theme.media.lg} {
+    height: calc(100vh - 80px);
+  }
 `;
 
 interface AuthPageProps {

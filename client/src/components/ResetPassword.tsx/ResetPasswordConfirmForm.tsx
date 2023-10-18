@@ -63,7 +63,11 @@ export function ResetPasswordConfirmForm() {
   }
 
   if (validateResetPasswordTokenIsLoading) {
-    return <FullPageSpinner />;
+    return (
+      <StyledAuthFormContainer $center>
+        <FullPageSpinner $height={50} />
+      </StyledAuthFormContainer>
+    );
   }
 
   const token = searchParams.get('token') as string;
