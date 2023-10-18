@@ -1,4 +1,4 @@
-import { MAIN_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '#/libs/constants/routes';
+import { MAIN_ROUTE, RESET_PASSWORD_ROUTE, SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '#/libs/constants/routes';
 import { isErrorWithMessage } from '#/libs/helpers/isErrorWithMessage';
 import { isFetchBaseQueryError } from '#/libs/helpers/isFetchBaseQueryError';
 import { FetchError } from '#/store/api';
@@ -15,7 +15,7 @@ import { StyledInput } from '../Input/Input';
 import Spinner from '../Spinner/Spinner';
 import { Text } from '../Text/Text';
 
-const StyledAuthFormContainer = styled(Flex)`
+export const StyledAuthFormContainer = styled(Flex)`
   width: 100%;
 
   @media ${({ theme }) => theme.media.lg} {
@@ -27,7 +27,7 @@ const StyledAuthFormContainer = styled(Flex)`
   }
 `;
 
-const StyledAuthForm = styled.form`
+export const StyledAuthForm = styled.form`
   width: clamp(250px, 100%, 350px);
   padding: 12px;
 
@@ -36,17 +36,17 @@ const StyledAuthForm = styled.form`
   }
 `;
 
-const StyledAuthFormLabel = styled(Text)`
+export const StyledAuthFormLabel = styled(Text)`
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 `;
 
-const StyledAuthFormHeader = styled(Text)`
+export const StyledAuthFormHeader = styled(Text)`
   margin-bottom: 10px;
 `;
 
-const StyledAuthFormButton = styled(Button)`
+export const StyledAuthFormButton = styled(Button)`
   width: 100%;
   margin-top: 30px;
   display: flex;
@@ -55,7 +55,7 @@ const StyledAuthFormButton = styled(Button)`
   gap: 20px;
 `;
 
-const StyledAuthFormLink = styled(Text)`
+export const StyledAuthFormLink = styled(Text)`
   font-family: 'Lato';
   margin-top: 10px;
   & a {
@@ -174,7 +174,7 @@ export function AuthForm() {
 
         <Flex $justifyEnd>
           <StyledAuthFormLink $size={14} $weight="bold">
-            <Link to="/">Forgot password?</Link>
+            <Link to={RESET_PASSWORD_ROUTE}>Forgot password?</Link>
           </StyledAuthFormLink>
         </Flex>
 

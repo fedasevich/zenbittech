@@ -1,8 +1,7 @@
 import { User } from '#/libs/types/User/User.type';
 import { api } from '#/store/api';
 
-export interface UserResponse {
-  user: User;
+export interface TokenResponse {
   token: string;
 }
 
@@ -10,16 +9,20 @@ export type SignRequest = Pick<User, 'email'> & {
   password: string;
 };
 
+type ResetPasswordConfirmRequest = TokenResponse & {
+  password: string;
+};
+
 export const userApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    signIn: builder.mutation<UserResponse, SignRequest>({
+    signIn: builder.mutation<TokenResponse, SignRequest>({
       query: (body) => ({
         body,
         url: '/auth/sign-in',
         method: 'POST'
       })
     }),
-    signUp: builder.mutation<UserResponse, SignRequest>({
+    signUp: builder.mutation<TokenResponse, SignRequest>({
       query: (body) => ({
         body,
         url: '/auth/sign-up',
@@ -29,6 +32,25 @@ export const userApi = api.injectEndpoints({
     check: builder.query<User, void>({
       query: () => ({
         url: '/auth/check'
+      })
+    }),
+    resetPassword: builder.mutation<string, Pick<User, 'email'>>({
+      query: (body) => ({
+        body,
+        url: '/auth/reset-password',
+        method: 'POST'
+      })
+    }),
+    validateResetPasswordToken: builder.query<string, TokenResponse>({
+      query: ({ token }) => ({
+        url: `/auth/reset-password?token=${token}`
+      })
+    }),
+    resetPasswordConfirm: builder.mutation<string, ResetPasswordConfirmRequest>({
+      query: (body) => ({
+        body,
+        url: `/auth/reset-password/confirm`,
+        method: 'POST'
       })
     })
   })
