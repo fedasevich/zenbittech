@@ -1,11 +1,11 @@
 import { Building } from '#/libs/types/Building/Building.type';
 import { api } from '#/store/api';
 
-export const bookingApi = api.injectEndpoints({
+export const buildingApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllBuildings: builder.query<Building[], void>({
       query: () => ({
-        url: '/bookings'
+        url: '/building'
       }),
       providesTags: (result) => {
         return result
@@ -13,13 +13,5 @@ export const bookingApi = api.injectEndpoints({
           : [{ type: 'Buildings', id: 'LIST' }];
       }
     })
-    // createBuilding: builder.mutation<Building, CreateBuildingRequest>({
-    //   query: (body) => ({
-    //     url: `/bookings`,
-    //     method: 'POST',
-    //     body
-    //   }),
-    //   invalidatesTags: ['Building']
-    // })
   })
 });

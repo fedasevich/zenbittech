@@ -12,16 +12,16 @@ export class AuthController {
 
   @ApiOperation({ summary: "Login in the system" })
   @ApiResponse({ status: 200, type: TokenResponseDto })
-  @Post("/login")
-  login(@Body() userDto: CreateUserDto) {
-    return this.authService.login(userDto);
+  @Post("/sign-in")
+  signIn(@Body() userDto: CreateUserDto) {
+    return this.authService.signIn(userDto);
   }
 
   @ApiOperation({ summary: "Registration in the system" })
   @ApiResponse({ status: 200, type: TokenResponseDto })
-  @Post("/registration")
-  registration(@Body() userDto: CreateUserDto) {
-    return this.authService.registration(userDto);
+  @Post("/sign-up")
+  signUp(@Body() userDto: CreateUserDto) {
+    return this.authService.signUp(userDto);
   }
 
   @ApiOperation({ summary: "Validating token" })

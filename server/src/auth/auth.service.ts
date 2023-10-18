@@ -17,17 +17,12 @@ export class AuthService {
     private jwtService: JwtService
   ) {}
 
-  async login(userDto: CreateUserDto) {
+  async signIn(userDto: CreateUserDto) {
     const user = await this.validateRegularUser(userDto);
     return this.generateToken(user);
   }
 
-  async googleLogin(userDto: CreateUserDto) {
-    const user = await this.validateGoogleUser(userDto);
-    return this.generateToken(user);
-  }
-
-  async registration(userDto: CreateUserDto) {
+  async signUp(userDto: CreateUserDto) {
     const candidate = await this.userService.getUserByEmail(userDto.email);
     if (candidate) {
       throw new HttpException(

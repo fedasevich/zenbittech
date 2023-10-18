@@ -1,6 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { FetchBaseQueryError, createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
+
+export type FetchError = FetchBaseQueryError & {
+  data: {
+    statusCode: number;
+    error: string;
+    message: string;
+  };
+};
 
 export const api = createApi({
   tagTypes: ['Buildings'],
