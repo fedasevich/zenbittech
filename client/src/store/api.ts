@@ -14,13 +14,18 @@ export const api = createApi({
   tagTypes: ['Buildings'],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    mode: 'cors',
-    credentials: 'include',
+    // credentials: 'same-origin',
+    // mode: 'cors',
+    // credentials: 'include',
+    // mode: 'cors',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
         headers.set('authorization', `Bearer ${token}`);
       }
+      // headers.set('Access-Control-Allow-Origin', '*');
+      console.log(headers);
+
       return headers;
     }
   }),
