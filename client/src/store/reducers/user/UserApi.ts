@@ -29,7 +29,7 @@ export const userApi = api.injectEndpoints({
         method: 'POST'
       })
     }),
-    check: builder.query<User, void>({
+    check: builder.query<TokenResponse, void>({
       query: () => ({
         url: '/auth/check'
       })

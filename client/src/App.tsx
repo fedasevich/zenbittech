@@ -28,11 +28,10 @@ export default function App() {
     }
     check()
       .unwrap()
-      .then((data) => {
+      .then(({ token }) => {
         dispatch(
           setCredentials({
-            user: { ...data },
-            token: localStorage.getItem('token') as string
+            token
           })
         );
       })
