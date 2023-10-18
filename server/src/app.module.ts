@@ -4,6 +4,7 @@ import { APP_FILTER } from "@nestjs/core";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import pg from "pg";
 import { AuthModule } from "./auth/auth.module";
 import { ResetPassword } from "./auth/reset-password/reset-password.model";
 import { ResetPasswordModule } from "./auth/reset-password/reset-password.module";
@@ -38,6 +39,7 @@ import { UsersModule } from "./users/users.module";
       database: process.env.POSTGRES_DB,
       models: [Building, User, ResetPassword],
       autoLoadModels: true,
+      dialectModule: pg,
       dialectOptions: {
         ssl: {
           require: true,

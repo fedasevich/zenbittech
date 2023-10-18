@@ -1,6 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
-import * as sgMail from "@sendgrid/mail";
 import { v4 as uuidv4 } from "uuid";
 import { UsersService } from "../../users/users.service";
 import { AuthService } from "../auth.service";
@@ -16,9 +15,7 @@ export class ResetPasswordService {
     private readonly authService: AuthService,
     @InjectModel(ResetPassword)
     private resetPasswordRepository: typeof ResetPassword
-  ) {
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  }
+  ) {}
 
   async verifyToken(token: ResetPasswordTokenDto) {
     const existingResetPassword = await this.resetPasswordRepository.findOne({
@@ -34,6 +31,10 @@ export class ResetPasswordService {
   }
 
   async generateResetLink({ email }: GenerateResetLinkDto) {
+    // eslint-disable-next-line global-require, @typescript-eslint/no-var-requires
+    const sgMail = require("@sendgrid/mail");
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
     const userByEmail = await this.userService.getUserByEmail(email);
 
     if (!userByEmail) {
