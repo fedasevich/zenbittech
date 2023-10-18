@@ -10,7 +10,7 @@ const StyledHero = styled(Flex)`
   background-image: url(${getImageUrl(IMAGES.HERO)});
   background-size: cover;
   color: white;
-  height: calc(100vh - 80px);
+  height: calc(100vh - 60px);
   background-position: center;
 
   & > div {
@@ -45,6 +45,10 @@ const StyledHero = styled(Flex)`
   & button {
     font-size: 20px;
     padding: 10px 24px;
+  }
+
+  @media ${({ theme }) => theme.media.lg} {
+    height: calc(100vh - 80px);
   }
 `;
 
