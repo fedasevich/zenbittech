@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import * as sgMail from "@sendgrid/mail";
-import { UsersService } from "src/users/users.service";
 import { v4 as uuidv4 } from "uuid";
+import { UsersService } from "../../users/users.service";
 import { AuthService } from "../auth.service";
 import { GenerateResetLinkDto } from "./dto/generate-reset-link.dto";
 import { ResetPasswordConfirmDto } from "./dto/reset-password-confirm.dto";

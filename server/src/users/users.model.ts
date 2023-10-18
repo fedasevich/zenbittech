@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Column, DataType, HasMany, Model, Table } from "sequelize-typescript";
-import { ResetPassword } from "src/auth/reset-password/reset-password.model";
+import { ResetPassword } from "../auth/reset-password/reset-password.model";
 
 interface UserCreationAttrs {
   email: string;
