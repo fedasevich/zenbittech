@@ -14,6 +14,7 @@ export const api = createApi({
   tagTypes: ['Buildings'],
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
+    mode: 'cors',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token');
       if (token) {
