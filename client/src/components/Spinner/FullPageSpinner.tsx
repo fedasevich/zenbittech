@@ -2,8 +2,12 @@ import styled from 'styled-components';
 import { Flex } from '../Flex/Flex';
 import Spinner from './Spinner';
 
-const StyledFullPageSpinner = styled(Flex)`
-  height: 100vh;
+interface StyledFullPageSpinnerProps {
+  $height?: number;
+}
+
+const StyledFullPageSpinner = styled(Flex)<StyledFullPageSpinnerProps>`
+  height: ${({ $height }) => ($height ? `${$height}vh` : '100vh')};
 `;
 
 export function FullPageSpinner() {
