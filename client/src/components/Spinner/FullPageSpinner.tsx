@@ -10,9 +10,12 @@ const StyledFullPageSpinner = styled(Flex)<StyledFullPageSpinnerProps>`
   height: ${({ $height }) => ($height ? `${$height}vh` : '100vh')};
 `;
 
-export function FullPageSpinner() {
+interface FullPageSpinnerProps {
+  $height?: number;
+}
+export function FullPageSpinner({ $height }: FullPageSpinnerProps) {
   return (
-    <StyledFullPageSpinner $center>
+    <StyledFullPageSpinner $center $height={$height}>
       <Spinner $size={100} />
     </StyledFullPageSpinner>
   );

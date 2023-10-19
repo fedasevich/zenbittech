@@ -1,5 +1,6 @@
 import { SIGN_IN_ROUTE, SIGN_UP_ROUTE } from '#/libs/constants/routes';
 import { useAppSelector } from '#/libs/hooks/redux';
+import { publicRoutes } from '#/routes';
 import { logOut } from '#/store/reducers/user/UserSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -33,7 +34,7 @@ export function Navbar() {
   const dispatch = useDispatch();
   const user = useAppSelector((state) => state.userReducer.user);
 
-  const isNavbarShow = location.pathname !== SIGN_IN_ROUTE && location.pathname !== SIGN_UP_ROUTE;
+  const isNavbarShow = publicRoutes.some((item) => item.isNavBarShow && location.pathname === item.path);
 
   const navigate = useNavigate();
 

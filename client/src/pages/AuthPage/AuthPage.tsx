@@ -3,16 +3,24 @@ import { StyledAuthFormImage } from '#/components/AuthForm/AuthFormImage';
 import { Flex } from '#/components/Flex/Flex';
 import styled from 'styled-components';
 
-const StyledAuthPage = styled(Flex)`
-  height: calc(100vh - 80px);
+export const StyledAuthPage = styled(Flex)`
+  height: calc(100vh - 60px);
   width: 100%;
+
+  @media ${({ theme }) => theme.media.lg} {
+    height: calc(100vh - 80px);
+  }
 `;
 
-export function AuthPage() {
+interface AuthPageProps {
+  children?: React.ReactNode;
+}
+
+export function AuthPage({ children }: AuthPageProps) {
   return (
     <StyledAuthPage>
       <StyledAuthFormImage />
-      <AuthForm />
+      {children || <AuthForm />}
     </StyledAuthPage>
   );
 }

@@ -1,6 +1,8 @@
 import { User } from '#/libs/types/User/User.type';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
+// eslint-disable-next-line camelcase
+import jwt_decode from 'jwt-decode';
 
 type UserState = {
   user: User | null;
@@ -14,7 +16,8 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setCredentials: (state, { payload: { user, token } }: PayloadAction<{ user: User; token: string }>) => {
+    setCredentials: (state, { payload: { token } }: PayloadAction<{ token: string }>) => {
+      const user = jwt_decode<User>(token);
       state.user = user;
       localStorage.setItem('token', token);
     },

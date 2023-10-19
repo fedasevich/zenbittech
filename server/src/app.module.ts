@@ -4,7 +4,10 @@ import { APP_FILTER } from "@nestjs/core";
 import { SequelizeModule } from "@nestjs/sequelize";
 import { ServeStaticModule } from "@nestjs/serve-static";
 import { join } from "path";
+import pg from "pg";
 import { AuthModule } from "./auth/auth.module";
+import { ResetPassword } from "./auth/reset-password/reset-password.model";
+import { ResetPasswordModule } from "./auth/reset-password/reset-password.module";
 import { Building } from "./building/building.model";
 import { BuildingModule } from "./building/building.module";
 import { AllExceptionsFilter } from "./filters/all-exceptions.filter";
@@ -34,11 +37,19 @@ import { UsersModule } from "./users/users.module";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [Building, User],
+      models: [Building, User, ResetPassword],
       autoLoadModels: true,
+      dialectModule: pg,
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     }),
     UsersModule,
     AuthModule,
+    ResetPasswordModule,
     BuildingModule,
   ],
 })

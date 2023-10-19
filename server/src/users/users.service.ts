@@ -1,7 +1,6 @@
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateUserDto } from "./dto/update-user.dto";
 import { User } from "./users.model";
 
 @Injectable()
@@ -21,13 +20,7 @@ export class UsersService {
     return user;
   }
 
-  updateUser(id: number, dto: UpdateUserDto) {
-    if (!Object.keys(dto).length) {
-      throw new HttpException(
-        { message: "Wrong data" },
-        HttpStatus.BAD_REQUEST
-      );
-    }
-    return User.update({ ...dto }, { where: { id } });
+  changePassword(id: number, password: string) {
+    return User.update({ password }, { where: { id } });
   }
 }
