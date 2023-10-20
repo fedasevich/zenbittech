@@ -29,6 +29,7 @@ import { UsersModule } from "./users/users.module";
     }),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "..", "/src/", "static"),
+      serveRoot: "/static",
     }),
     SequelizeModule.forRoot({
       dialect: "postgres",
